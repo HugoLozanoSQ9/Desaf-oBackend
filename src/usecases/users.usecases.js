@@ -15,10 +15,6 @@ async function create(userData){
     return newUser
 }
 
-async function getAll(){
-    const allUsers = await Users.find()
-    return allUsers
-}
 
 async function getById(id){
     
@@ -27,22 +23,8 @@ async function getById(id){
 }
 
 
-async function deleteById(id){
-    const userDeleted = await Users.findByIdAndDelete(id)
-    if(!userDeleted) throw new Error('User does not exists') 
-    return userDeleted
-}
-
-async function updateByID(id,newUserData){
-    const updatedUser = await Users.findByIdAndUpdate(id,newUserData, {new:true})
-    return updatedUser
-
-}
 
 module.exports = {
     create,
-    getAll,
-    deleteById,
-    getById,
-    updateByID
+    getById
 }

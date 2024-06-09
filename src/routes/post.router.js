@@ -54,8 +54,18 @@ router.delete('/:id',auth, async (req,res)=>{
     try {
 
         const {id} = req.params
+        const token = req.headers.authorization;
 
-        const postDeleted = await postUsecase.deleteById(id)
+        const separar = () => {
+            const separado = token.split(".")
+            return separado
+        }
+
+        const tokenUser = separar()[1]
+
+        const userId = JSON.parse(atob(tokenUser)).id
+        
+        const postDeleted = await postUsecase.deleteById(id,userId)
 
         res.json({
             success:true,

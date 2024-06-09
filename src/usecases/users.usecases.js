@@ -19,6 +19,7 @@ async function create(userData){
 async function getById(id){
     
     const user = await Users.findById(id)
+    
     return user
 }
 

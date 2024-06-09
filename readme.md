@@ -108,7 +108,15 @@ http://localhost:8080/posts
 ```
 2. Hecho esto ahora solo hace falta hplicar el método GET y nos va a devolver un JSON con todos los Posts creados anteriormente.
 
-3. Para esta operación NO se require autenticación
+3. Puedes hacer la busqueda de posts en específicos con el query param search que es solo agregarle un ?search=texto_a_buscar por ejemplo:
+
+```
+http://localhost:8080/posts?search=corru
+```
+
+Dado que el filtro está hecho con incluldes puedes poner solo parte de una palabra y si existe en base de datos te va a mostrar ese resultado
+
+4. Para esta operación NO se require autenticación
 
 #### Crear un Post
 

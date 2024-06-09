@@ -7,15 +7,17 @@ async function create(postData) {
     return newPost
 }
 
-async function getAll() {
+async function getAll(search) {
     const allPosts = await Post.find().populate("user")
-    return allPosts
+    if(!search) return allPosts
+    const dataFiltered = allPosts.filter((elemento)=>elemento.title.includes(search))
+    return dataFiltered
 }
 
 async function deleteById(id,userId) {
 
     const postActual = await Post.findById(id)
-    
+
     if(!postActual) throw createError(404, "Post not found")
 
     if (userId != postActual.user) {

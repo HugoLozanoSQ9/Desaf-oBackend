@@ -8,8 +8,9 @@ const auth = require('../middlewares/auth.middleware')
 
 router.get('/',async (req,res)=>{
     try {
-        
-        const post = await postUsecase.getAll() 
+        const {search} = req.query
+
+        const post = await postUsecase.getAll(search) 
         
         res.json({
             success:true,
@@ -54,8 +55,8 @@ router.delete('/:id',auth, async (req,res)=>{
     try {
 
         const {id} = req.params
-        const token = req.headers.authorization;
-
+        const {authorization} = req.headers
+        const token = authorization
         const separar = () => {
             const separado = token.split(".")
             return separado

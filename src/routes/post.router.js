@@ -34,7 +34,17 @@ router.post('/',auth,async(req,res)=>{
     
     try { 
 
-        const postCreated = await postUsecase.create(req.body) 
+        const {authorization} = req.headers
+        const token = authorization
+        const separar = () => {
+            const separado = token.split(".")
+            return separado
+        }
+
+        const tokenUser = separar()[1]
+
+        const userId = JSON.parse(atob(tokenUser)).id
+        const postCreated = await postUsecase.create(req.body, userId) 
         
         res.json({
             success:true,

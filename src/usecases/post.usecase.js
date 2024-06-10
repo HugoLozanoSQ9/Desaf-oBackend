@@ -2,7 +2,8 @@ const Post = require('../models/post.model')
 
 const createError = require('http-errors')
 
-async function create(postData) {
+async function create(postData,userId) {
+    postData.user =userId
     const newPost = await Post.create(postData)
     return newPost
 }

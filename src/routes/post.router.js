@@ -98,9 +98,20 @@ router.delete('/:id',auth, async (req,res)=>{
 router.patch('/:id',auth,async(req,res)=>{
     try {
         
+        const {authorization} = req.headers
+        const token = authorization
+        const separar = () => {
+            const separado = token.split(".")
+            return separado
+        }
+
+        const tokenUser = separar()[1]
+
+        const userId = JSON.parse(atob(tokenUser)).id
+
         const {id} = req.params
         
-        const postUpdated = await postUsecase.updateByID(id,req.body)
+        const postUpdated = await postUsecase.updateByID(id,req.body,userId)
 
         res.json({
             success:true,

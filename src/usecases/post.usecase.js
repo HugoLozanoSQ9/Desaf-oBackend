@@ -33,10 +33,10 @@ async function deleteById(id,userId) {
 
 }
 
-async function updateByID(id, newPostData) {
+async function updateByID(id, newPostData,userId) {
     newPostData.updatedAt = Date.now()
     const actualPost = await Post.findById(id)
-    if(actualPost.user != newPostData.user) throw createError(409, "you cant update a user")
+    if(actualPost.user != userId) throw createError(409, "you cant update a user")
 
     const updatedPost= await Post.findByIdAndUpdate(id, newPostData, { new: true })
     if (!updatedPost) throw createError(404, "Post not found")

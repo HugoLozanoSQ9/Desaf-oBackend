@@ -12,7 +12,7 @@ router.post('/login', async (req, res) => {
         res.json({
             success: true,
             data: {
-                koder: { token }
+                token
             }
         })
 

@@ -45,9 +45,20 @@ async function updateByID(id, newPostData,userId) {
 
 }
 
+async function getById(id) {
+
+    const postActual = await Post.findById(id)
+
+    if(!postActual) throw createError(404, "Post not found")
+
+    return postActual
+
+}
+
 module.exports = {
     create,
     getAll,
     deleteById,
-    updateByID
+    updateByID,
+    getById
 }
